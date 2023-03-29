@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   processColor,
   ScrollView,
+  FlatList,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Fa5icons from 'react-native-vector-icons/FontAwesome5';
@@ -18,12 +19,73 @@ import {Utils} from '../utils/utils';
 import DropDownPicker from 'react-native-dropdown-picker';
 import BasicBarChart from '../components/charts/basicBarChart';
 import {PieChart} from 'react-native-charts-wrapper';
+import Realm from 'realm';
 
 const dataHome = {
   name: 'Nguyễn Bá Bình',
   tongsodu: '1000000',
   thu: '5000000',
   chi: '4000000',
+  list: [
+    {
+      id: '1',
+      icon: 'icon',
+      category: {
+        id: '1',
+        name: 'Biếu tặng',
+      },
+      parentCategory: {
+        id: '1',
+        name: 'Hiếu hỉ',
+      },
+      description: 'Tiêu tết',
+      money: '230000',
+      wallet: {
+        id: 1,
+        name: 'Bình',
+      },
+      dateTime: '31/01/2023',
+    },
+    {
+      id: '2',
+      icon: 'icon',
+      category: {
+        id: '1',
+        name: 'Biếu tặng',
+      },
+      parentCategory: {
+        id: '1',
+        name: 'Hiếu hỉ',
+      },
+      description: 'Ông bà, bố mẹ',
+      money: '600000',
+      wallet: {
+        id: 1,
+        name: 'Bình',
+      },
+      dateTime: '31/01/2023',
+    },
+    {
+      id: '3',
+      icon: 'icon',
+      category: {
+        id: '2',
+        name: 'Đi chợ/ mua sắm/ siêu thị',
+      },
+      categoryParent: {
+        id: '2',
+        name: 'Mua sắm',
+      },
+
+      description: 'Mua bao lì xì',
+      money: '40000',
+      wallet: {
+        id: 1,
+        name: 'Bình',
+      },
+      dateTime: '31/01/2023',
+    },
+  ],
 };
 const dataPieChart = [
   {value: 1350000, label: 'Hiếu hỉ'},
@@ -49,7 +111,7 @@ export default function Home() {
       <FocusStatusBar
         backgroundColor={Colors.primary}
         barStyle="light-content"></FocusStatusBar>
-      <View>
+      <ScrollView>
         <View style={styles.header}>
           <View style={styles.header_first}>
             <View>
@@ -151,7 +213,7 @@ export default function Home() {
                         color: Colors.textPrimary,
                         marginLeft: 4,
                       }}>
-                      Thuz
+                      Thu
                     </Text>
                   </View>
                   <View>
@@ -300,7 +362,76 @@ export default function Home() {
             </Pressable>
           </View>
         </View>
-      </View>
+        <View
+          style={{
+            marginTop: 10,
+            backgroundColor: 'white',
+            paddingHorizontal: 10,
+            paddingVertical: 10,
+          }}>
+          <View>
+            <Text style={{...gStyles.textS18W600, color: Colors.textPrimary}}>
+              Ghi chép gần đây
+            </Text>
+          </View>
+          <View>
+            {dataHome.list.map((item, index) => {
+              return (
+                <Pressable key={index} onPress={() => {}}>
+                  <View
+                    style={{...gStyles.flexRowBetweenCenter, paddingTop: 10}}>
+                    <View style={{...gStyles.flexRowNoneCenter}}>
+                      <View style={{paddingRight: 8}}>
+                        <Fa5icons name="gift" size={40}></Fa5icons>
+                      </View>
+                      <View>
+                        <Text
+                          style={{
+                            ...gStyles.textS18W600,
+                            color: Colors.textPrimary,
+                          }}>
+                          {item.category.name}
+                        </Text>
+                        <Text
+                          style={{...gStyles.textS16W400, fontStyle: 'italic'}}>
+                          {item.description}
+                        </Text>
+                        <Text style={{...gStyles.textS16W400}}>
+                          {item.dateTime}
+                        </Text>
+                      </View>
+                    </View>
+                    <View>
+                      <View>
+                        <Text
+                          style={{...gStyles.textS18W400, color: Colors.red}}>
+                          {Utils.formatNumber(item.money)} đ
+                        </Text>
+                      </View>
+                      <View
+                        style={{
+                          ...gStyles.flexRowEndCenter,
+                        }}>
+                        <Fa5icons name="wallet" size={18}></Fa5icons>
+                        <Text style={{...gStyles.textS16W400, paddingLeft: 4}}>
+                          {item.wallet.name}
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                </Pressable>
+              );
+            })}
+          </View>
+          <View style={{...gStyles.flexRowEndCenter, paddingTop: 8}}>
+            <Pressable onPress={() => {}}>
+              <Text style={{...gStyles.textS16W400, color: Colors.primary}}>
+                Xem ghi chép
+              </Text>
+            </Pressable>
+          </View>
+        </View>
+      </ScrollView>
     </View>
   );
 }

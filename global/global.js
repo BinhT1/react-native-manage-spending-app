@@ -25,6 +25,10 @@ export const gStyles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 600,
   },
+  textS18W400: {
+    fontSize: 18,
+    fontWeight: 400,
+  },
   textS18W600: {
     fontSize: 18,
     fontWeight: 600,
@@ -40,6 +44,12 @@ export const gStyles = StyleSheet.create({
   flexRowNoneCenter: {
     display: 'flex',
     flexDirection: 'row',
+    alignItems: 'center',
+  },
+  flexRowEndCenter: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
     alignItems: 'center',
   },
   flexRowBetweenCenter: {
