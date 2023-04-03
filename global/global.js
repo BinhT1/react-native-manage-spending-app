@@ -53,6 +53,12 @@ export const gStyles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
+  flexRowCenterCenter: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   flexRowBetweenCenter: {
     display: 'flex',
     flexDirection: 'row',

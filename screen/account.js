@@ -15,6 +15,11 @@ import Fa5icons from 'react-native-vector-icons/FontAwesome5';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import LinearGradient from 'react-native-linear-gradient';
 import _ from 'lodash';
+import {Utils} from '../utils/utils';
+
+const data_account = {
+  tong_tien: '1000000',
+};
 
 export default function Account() {
   const [headerSearch, setHeaderSearch] = useState(false);
@@ -76,7 +81,7 @@ export default function Account() {
       {...props}
       renderLabel={({route, focused, color}) => (
         <Text
-          style={{textTransform: 'uppercase', color, ...gStyles.textS16W400}}>
+          style={{textTransform: 'uppercase', color, ...gStyles.textS14W400}}>
           {route.title}
         </Text>
       )}
@@ -90,7 +95,16 @@ export default function Account() {
 
   const TaiKhoanRoute = () => (
     <View style={styles.routeContainer}>
-      <Text>Tài khoản</Text>
+      <View style={{backgroundColor: 'white', ...gStyles.flexRowCenterCenter}}>
+        <Text
+          style={{
+            ...gStyles.textS18W600,
+            color: Colors.textPrimary,
+            padding: 10,
+          }}>
+          Tổng tiền: {Utils.formatNumber(data_account.tong_tien)} đ
+        </Text>
+      </View>
     </View>
   );
   const SoTietKiemRoute = () => (
